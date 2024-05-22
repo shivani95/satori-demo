@@ -2,8 +2,18 @@ import os
 import requests
 from google.cloud import storage, speech
 from flask import Flask, request, jsonify
-GEMINI_API_KEY='AIzaSyDUl_VA_VHc7tQ38D7O8kzLstASc-N_AJE'
-ZOOM_API_KEY='PWUduPaDSyy7LmF8GxDQHA'
+from dotenv import load_dotenv
+import os
+
+# Load env file
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+ZOOM_API_KEY = os.getenv('ZOOM_API_KEY')
+GOOGLE_APPLICATION_CREDENTIALS = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+
+# Set the Google Application Credentials environment variable
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_APPLICATION_CREDENTIALS
 
 app = Flask(__name__)
 
@@ -12,7 +22,7 @@ storage_client = storage.Client()
 speech_client = speech.SpeechClient()
 
 # Load environment variables
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/shivanipatel/Satori-Demo-with-VertexAI/credentials/satori-ai-demo-571aba22c2f4.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_APPLICATION_CREDENTIALS
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 ZOOM_API_KEY = os.environ.get('ZOOM_API_KEY')
 
