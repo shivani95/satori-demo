@@ -1,0 +1,12 @@
+runtime: custom
+
+env: flex
+
+entrypoint: gunicorn -b :$PORT app:app
+
+env_variables:
+  GOOGLE_APPLICATION_CREDENTIALS: /Users/shivanipatel/Documents/satori-demo/zoom-plugin-general/credentials/satori-ai-demo-571aba22c2f4.json
+
+handlers:
+- url: /.*
+  script: auto
