@@ -95,11 +95,11 @@ def webhook():
     return jsonify({'status': 'ignored'}), 200
 
 def transcribe_recording(recording_url):
-    bucket = storage_client.bucket('your_bucket_name')
+    bucket = storage_client.bucket('satori-ai-demo.appspot.com')
     blob = bucket.blob(f'recordings/{os.path.basename(recording_url)}')
     blob.upload_from_string(requests.get(recording_url).content)
     
-    audio = speech.RecognitionAudio(uri=f'gs://your_bucket_name/recordings/{os.path.basename(recording_url)}')
+    audio = speech.RecognitionAudio(uri=f'gs://satori-ai-demo.appspot.com/recordings/{os.path.basename(recording_url)}')
     config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=16000,
